@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<title>차토체스 QR 카드</title>
+<style>
+  @page { size: A4; margin: 10mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #888; font-family: "Pretendard", "Malgun Gothic", sans-serif;
+         -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hint { max-width: 210mm; margin: 12px auto; color: #fff; font-size: 14px; }
+  .page { width: 210mm; height: 297mm; margin: 0 auto 12px; background: #fff; padding: 10mm;
+          page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  .grid { display: grid; grid-template-columns: repeat(2, 90mm); grid-auto-rows: 64mm;
+          gap: 5mm 10mm; }
+  .card { border: 3mm solid var(--c); border-radius: 4mm; background: var(--t);
+          display: flex; align-items: center; gap: 4mm; padding: 3mm; outline: 0.3mm dashed #999;
+          outline-offset: 1.5mm; }
+  .qr { width: 46mm; height: 46mm; flex: none; background: #fff; border-radius: 2mm; padding: 1mm; }
+  .qr svg { width: 100%; height: 100%; display: block; }
+  .info { flex: 1; min-width: 0; text-align: center; }
+  .team { display: inline-block; background: var(--c); color: #fff; font-weight: 800;
+          font-size: 9pt; padding: 0.6mm 2.5mm; border-radius: 3mm; letter-spacing: .5px; }
+  .icon { font-size: 30pt; line-height: 1.2; margin-top: 1mm;
+          font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif; }
+  .name { font-size: 17pt; font-weight: 900; color: #222; }
+  .role { font-size: 8.5pt; color: #555; margin-top: .5mm; }
+  .code { font-size: 6pt; color: #999; margin-top: 1.5mm; font-family: Consolas, monospace; }
+  @media print {
+    body { background: none; }
+    .hint { display: none; }
+    .page { margin: 0; width: auto; height: auto; padding: 0; }
+  }
+</style></head><body>
+<p class="hint">Ctrl+P → 용지 A4, 배율 100%(실제 크기), '배경 그래픽' 켜고 인쇄하세요. 1쪽은 빨강(P1), 2쪽은 파랑(P2) 세트입니다. 점선을 따라 자르면 돼요.</p>
+<section class="page"><div class="grid">
+    <div class="card" style="--c:#d6333f;--t:#fde8ea">
+      <div class="qr"><svg viewBox="0 0 33 33" class="segno"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#000" d="M2 2.5h7m1 0h3m2 0h2m3 0h2m2 0h7m-29 1h1m5 0h1m2 0h1m2 0h3m2 0h1m1 0h1m2 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m2 0h2m3 0h1m1 0h3m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m2 0h2m1 0h1m1 0h1m1 0h2m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m2 0h2m1 0h3m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m4 0h5m2 0h1m1 0h1m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h1m1 0h2m4 0h1m2 0h1m-15 1h2m2 0h2m1 0h2m1 0h1m2 0h3m1 0h1m1 0h1m1 0h1m1 0h1m-29 1h1m1 0h1m2 0h1m2 0h1m1 0h4m2 0h1m3 0h3m1 0h1m3 0h1m-29 1h1m1 0h2m2 0h3m4 0h3m1 0h2m1 0h5m-25 1h3m1 0h2m1 0h3m3 0h5m4 0h1m1 0h2m1 0h2m-29 1h1m1 0h1m1 0h1m1 0h2m4 0h3m4 0h2m1 0h1m4 0h2m-28 1h4m6 0h1m1 0h3m3 0h3m2 0h1m1 0h1m1 0h1m-29 1h1m1 0h1m1 0h3m1 0h2m1 0h1m4 0h1m1 0h1m3 0h2m-22 1h3m6 0h1m2 0h2m1 0h4m2 0h1m1 0h3m-27 1h2m1 0h1m1 0h2m2 0h1m1 0h1m2 0h5m2 0h1m1 0h1m-25 1h5m3 0h2m4 0h2m4 0h1m2 0h1m1 0h1m-26 1h4m1 0h3m2 0h1m3 0h5m1 0h4m1 0h2m1 0h1m-29 1h1m4 0h1m1 0h1m7 0h1m1 0h4m2 0h1m3 0h2m-29 1h1m1 0h2m2 0h1m2 0h2m1 0h1m1 0h1m1 0h1m2 0h6m3 0h1m-21 1h1m2 0h2m2 0h2m1 0h3m3 0h1m1 0h1m-27 1h7m4 0h3m1 0h1m1 0h4m1 0h1m1 0h2m-26 1h1m5 0h1m1 0h2m2 0h2m2 0h1m3 0h1m3 0h2m1 0h1m-28 1h1m1 0h3m1 0h1m5 0h3m2 0h8m1 0h2m-28 1h1m1 0h3m1 0h1m2 0h5m1 0h1m1 0h3m4 0h1m-25 1h1m1 0h3m1 0h1m2 0h1m3 0h2m2 0h1m4 0h3m2 0h1m-28 1h1m5 0h1m2 0h1m2 0h2m1 0h1m3 0h2m1 0h1m1 0h1m1 0h1m1 0h1m-29 1h7m2 0h3m1 0h4m6 0h2"/></svg></div>
+      <div class="info">
+        <div class="team">P1 · RED</div>
+        <div class="icon">🛡️</div>
+        <div class="name">기사</div>
+        <div class="role">탱커 · 앞줄</div>
+        <div class="code">CHATO:P1:knight</div>
+      </div>
+    </div>
+    <div class="card" style="--c:#d6333f;--t:#fde8ea">
+      <div class="qr"><svg viewBox="0 0 29 29" class="segno"><path fill="#fff" d="M0 0h29v29h-29z"/><path class="qrline" stroke="#000" d="M2 2.5h7m1 0h2m1 0h1m2 0h1m1 0h1m1 0h7m-25 1h1m5 0h1m1 0h2m1 0h1m4 0h1m1 0h1m5 0h1m-25 1h1m1 0h3m1 0h1m1 0h2m1 0h1m3 0h2m1 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m2 0h2m1 0h2m4 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m9 0h1m1 0h1m1 0h3m1 0h1m-25 1h1m5 0h1m1 0h3m2 0h4m1 0h1m5 0h1m-25 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-17 1h2m4 0h1m1 0h1m-15 1h3m1 0h1m1 0h4m1 0h1m1 0h1m1 0h3m2 0h3m-24 1h1m1 0h2m3 0h1m1 0h1m1 0h3m1 0h1m2 0h1m1 0h1m2 0h1m-25 1h2m2 0h3m1 0h4m2 0h1m2 0h2m1 0h1m2 0h2m-24 1h1m1 0h3m2 0h1m3 0h6m2 0h1m3 0h1m-25 1h1m1 0h5m2 0h1m2 0h2m1 0h1m1 0h4m-21 1h1m2 0h1m1 0h1m3 0h2m1 0h1m2 0h1m8 0h1m-25 1h1m2 0h1m1 0h2m1 0h1m2 0h1m1 0h5m1 0h1m1 0h1m1 0h2m-25 1h1m1 0h1m6 0h1m2 0h2m1 0h3m5 0h1m-24 1h1m1 0h1m1 0h1m1 0h2m2 0h5m1 0h6m2 0h1m-17 1h9m3 0h1m1 0h1m1 0h1m-25 1h7m3 0h3m3 0h1m1 0h1m1 0h1m1 0h3m-25 1h1m5 0h1m2 0h2m1 0h1m3 0h1m3 0h2m-22 1h1m1 0h3m1 0h1m1 0h1m3 0h2m1 0h6m1 0h2m-24 1h1m1 0h3m1 0h1m1 0h3m2 0h1m3 0h6m1 0h1m-25 1h1m1 0h3m1 0h1m1 0h3m2 0h2m6 0h2m1 0h1m-25 1h1m5 0h1m2 0h1m3 0h5m6 0h1m-25 1h7m2 0h1m1 0h2m1 0h1m3 0h1m4 0h2"/></svg></div>
+      <div class="info">
+        <div class="team">P1 · RED</div>
+        <div class="icon">🪨</div>
+        <div class="name">골렘</div>
+        <div class="role">탱커 · 앞줄</div>
+        <div class="code">CHATO:P1:golem</div>
+      </div>
+    </div>
+    <div class="card" style="--c:#d6333f;--t:#fde8ea">
+      <div class="qr"><svg viewBox="0 0 33 33" class="segno"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#000" d="M2 2.5h7m1 0h1m1 0h1m1 0h1m3 0h1m3 0h1m1 0h7m-29 1h1m5 0h1m1 0h1m2 0h2m3 0h3m1 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m2 0h2m1 0h2m1 0h1m1 0h1m4 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h1m1 0h1m2 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m3 0h1m2 0h1m4 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m1 0h1m1 0h3m4 0h4m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-20 1h1m1 0h1m1 0h1m2 0h1m2 0h1m-17 1h1m2 0h1m2 0h5m1 0h3m5 0h3m1 0h2m-28 1h1m1 0h1m1 0h1m2 0h1m4 0h1m2 0h1m2 0h3m1 0h1m3 0h1m-25 1h2m1 0h2m1 0h5m6 0h1m1 0h1m3 0h2m-26 1h2m1 0h1m1 0h3m1 0h4m2 0h1m3 0h2m3 0h1m1 0h1m-27 1h8m1 0h1m1 0h1m2 0h1m2 0h5m1 0h1m2 0h1m-27 1h1m4 0h1m1 0h5m2 0h1m2 0h2m1 0h2m2 0h2m-28 1h1m1 0h1m1 0h7m1 0h3m7 0h1m4 0h2m-28 1h2m5 0h1m2 0h1m1 0h1m1 0h4m2 0h1m2 0h1m3 0h1m-29 1h2m2 0h1m1 0h1m1 0h2m2 0h1m2 0h3m5 0h1m1 0h2m-26 1h2m2 0h1m1 0h1m1 0h1m1 0h1m2 0h3m1 0h4m1 0h1m1 0h3m-28 1h1m2 0h1m2 0h2m1 0h1m2 0h7m3 0h3m2 0h2m-27 1h2m1 0h1m2 0h2m1 0h2m3 0h1m1 0h1m2 0h2m2 0h1m1 0h1m-28 1h1m1 0h1m3 0h2m1 0h9m2 0h5m1 0h1m1 0h1m-21 1h3m1 0h2m2 0h2m2 0h1m3 0h2m2 0h1m-29 1h7m3 0h2m1 0h4m1 0h1m1 0h1m1 0h1m1 0h1m1 0h2m-28 1h1m5 0h1m3 0h1m1 0h3m1 0h1m1 0h3m3 0h1m1 0h3m-29 1h1m1 0h3m1 0h1m2 0h1m2 0h3m1 0h2m2 0h7m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h2m1 0h3m3 0h1m1 0h1m1 0h3m2 0h1m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h4m1 0h2m3 0h1m2 0h3m1 0h1m-29 1h1m5 0h1m3 0h1m1 0h5m2 0h1m2 0h2m3 0h1m-28 1h7m2 0h1m2 0h2m3 0h1m4 0h4m1 0h1"/></svg></div>
+      <div class="info">
+        <div class="team">P1 · RED</div>
+        <div class="icon">🪓</div>
+        <div class="name">광전사</div>
+        <div class="role">근접 딜러 · 앞줄</div>
+        <div class="code">CHATO:P1:berserker</div>
+      </div>
+    </div>
+    <div class="card" style="--c:#d6333f;--t:#fde8ea">
+      <div class="qr"><svg viewBox="0 0 33 33" class="segno"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#000" d="M2 2.5h7m1 0h1m3 0h1m3 0h1m1 0h1m3 0h7m-29 1h1m5 0h1m4 0h1m1 0h1m1 0h2m5 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m3 0h1m2 0h2m4 0h1m2 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m2 0h1m1 0h2m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m4 0h6m2 0h1m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m2 0h3m5 0h1m1 0h2m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-20 1h1m2 0h1m2 0h5m-18 1h1m1 0h3m1 0h1m1 0h1m4 0h1m2 0h1m2 0h1m3 0h1m2 0h1m-27 1h1m1 0h2m2 0h3m1 0h3m1 0h1m1 0h2m1 0h1m1 0h1m1 0h1m1 0h1m-28 1h3m2 0h9m2 0h2m6 0h2m1 0h2m-29 1h4m4 0h2m4 0h2m3 0h1m1 0h3m4 0h1m-29 1h2m3 0h3m3 0h1m2 0h1m1 0h1m3 0h4m1 0h1m2 0h1m-25 1h1m2 0h2m1 0h1m1 0h1m1 0h1m3 0h1m1 0h1m2 0h1m1 0h2m1 0h1m-28 1h1m1 0h1m1 0h3m1 0h2m1 0h1m2 0h1m4 0h2m1 0h1m2 0h3m-29 1h2m2 0h2m2 0h1m2 0h2m1 0h1m1 0h2m3 0h2m1 0h1m-23 1h1m1 0h1m1 0h1m1 0h3m1 0h1m5 0h4m2 0h1m1 0h1m1 0h1m-28 1h1m7 0h1m4 0h1m3 0h4m1 0h1m1 0h1m1 0h1m-28 1h1m1 0h7m1 0h3m1 0h1m2 0h1m1 0h2m1 0h1m2 0h1m1 0h2m-28 1h5m4 0h1m2 0h1m1 0h4m1 0h2m2 0h1m-25 1h1m5 0h1m1 0h1m2 0h2m1 0h1m4 0h6m3 0h1m-21 1h1m1 0h2m1 0h1m1 0h1m2 0h1m1 0h1m3 0h2m1 0h2m-29 1h7m2 0h1m1 0h2m3 0h2m1 0h2m1 0h1m1 0h5m-29 1h1m5 0h1m1 0h1m2 0h1m3 0h2m2 0h2m3 0h1m3 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m2 0h2m2 0h2m1 0h7m1 0h1m-29 1h1m1 0h3m1 0h1m4 0h1m2 0h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h2m-27 1h1m1 0h3m1 0h1m1 0h4m5 0h1m2 0h2m1 0h4m1 0h1m-29 1h1m5 0h1m3 0h2m6 0h1m2 0h1m1 0h1m3 0h1m-28 1h7m4 0h2m2 0h2m3 0h5m2 0h2"/></svg></div>
+      <div class="info">
+        <div class="team">P1 · RED</div>
+        <div class="icon">🗡️</div>
+        <div class="name">암살자</div>
+        <div class="role">암살 · 앞줄</div>
+        <div class="code">CHATO:P1:assassin</div>
+      </div>
+    </div>
+    <div class="card" style="--c:#d6333f;--t:#fde8ea">
+      <div class="qr"><svg viewBox="0 0 33 33" class="segno"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#000" d="M2 2.5h7m4 0h1m4 0h1m1 0h1m1 0h1m1 0h7m-29 1h1m5 0h1m2 0h1m9 0h2m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m5 0h2m1 0h1m4 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m2 0h1m2 0h1m1 0h1m1 0h2m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m5 0h5m2 0h2m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h3m4 0h1m1 0h2m1 0h1m-19 1h2m2 0h6m1 0h2m4 0h4m1 0h1m-24 1h1m1 0h2m6 0h3m2 0h2m6 0h2m1 0h1m-28 1h1m1 0h2m1 0h2m1 0h1m5 0h1m1 0h1m5 0h1m2 0h3m-27 1h2m5 0h1m4 0h1m1 0h1m3 0h1m7 0h1m-26 1h3m1 0h1m2 0h2m4 0h1m2 0h1m4 0h1m1 0h3m-28 1h2m1 0h3m2 0h3m4 0h5m1 0h1m1 0h1m4 0h1m-29 1h1m3 0h4m5 0h1m3 0h3m1 0h1m1 0h3m1 0h2m-29 1h3m1 0h2m4 0h1m1 0h1m6 0h1m1 0h3m1 0h1m1 0h1m-28 1h1m2 0h1m1 0h2m1 0h1m1 0h1m4 0h1m2 0h6m2 0h1m1 0h1m-28 1h5m2 0h1m1 0h1m1 0h2m3 0h4m1 0h4m2 0h1m-29 1h1m1 0h1m3 0h1m6 0h2m1 0h1m1 0h2m1 0h1m4 0h1m-25 1h2m1 0h1m1 0h2m2 0h1m2 0h1m4 0h1m4 0h1m1 0h3m-28 1h1m1 0h1m1 0h3m3 0h1m2 0h1m1 0h2m2 0h6m1 0h1m-20 1h2m1 0h2m4 0h1m1 0h2m3 0h1m2 0h2m-29 1h7m1 0h2m5 0h1m1 0h1m1 0h2m1 0h1m1 0h4m-28 1h1m5 0h1m5 0h2m1 0h6m3 0h1m2 0h1m-28 1h1m1 0h3m1 0h1m4 0h1m2 0h2m2 0h1m1 0h6m1 0h1m-28 1h1m1 0h3m1 0h1m1 0h2m2 0h1m4 0h1m1 0h2m2 0h1m2 0h1m-27 1h1m1 0h3m1 0h1m1 0h2m2 0h1m3 0h1m1 0h2m1 0h1m1 0h1m1 0h1m2 0h1m-29 1h1m5 0h1m2 0h3m2 0h1m2 0h3m1 0h1m2 0h1m2 0h1m-28 1h7m2 0h2m1 0h1m3 0h3m1 0h2m4 0h2"/></svg></div>
+      <div class="info">
+        <div class="team">P1 · RED</div>
+        <div class="icon">🏹</div>
+        <div class="name">궁수</div>
+        <div class="role">원거리 딜러 · 뒷줄</div>
+        <div class="code">CHATO:P1:archer</div>
+      </div>
+    </div>
+    <div class="card" style="--c:#d6333f;--t:#fde8ea">
+      <div class="qr"><svg viewBox="0 0 29 29" class="segno"><path fill="#fff" d="M0 0h29v29h-29z"/><path class="qrline" stroke="#000" d="M2 2.5h7m1 0h1m1 0h1m2 0h1m4 0h7m-25 1h1m5 0h1m1 0h2m1 0h1m4 0h1m1 0h1m5 0h1m-25 1h1m1 0h3m1 0h1m4 0h6m1 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m1 0h2m1 0h2m1 0h2m2 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m1 0h1m1 0h2m2 0h2m2 0h1m1 0h3m1 0h1m-25 1h1m5 0h1m1 0h3m2 0h1m2 0h1m1 0h1m5 0h1m-25 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-14 1h4m-12 1h1m2 0h1m2 0h2m1 0h1m2 0h1m3 0h3m1 0h2m-25 1h1m1 0h4m2 0h4m1 0h1m1 0h4m2 0h1m1 0h1m-24 1h3m1 0h1m1 0h2m1 0h4m3 0h2m1 0h1m1 0h1m1 0h2m-25 1h1m2 0h1m4 0h3m2 0h1m1 0h1m1 0h1m1 0h1m-17 1h5m1 0h1m5 0h5m1 0h2m-22 1h1m3 0h1m3 0h1m5 0h4m3 0h2m-24 1h1m2 0h1m1 0h2m1 0h1m1 0h3m1 0h1m1 0h4m2 0h1m1 0h1m-24 1h3m7 0h1m3 0h1m3 0h1m4 0h1m-25 1h2m2 0h1m1 0h2m1 0h2m1 0h1m1 0h1m1 0h5m3 0h1m-17 1h2m5 0h2m3 0h1m1 0h1m-23 1h7m4 0h1m2 0h1m1 0h1m1 0h1m1 0h2m1 0h2m-25 1h1m5 0h1m4 0h1m1 0h1m1 0h2m3 0h3m-23 1h1m1 0h3m1 0h1m4 0h1m4 0h6m-22 1h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h1m5 0h4m-24 1h1m1 0h3m1 0h1m2 0h2m1 0h1m2 0h1m3 0h2m1 0h1m1 0h1m-25 1h1m5 0h1m4 0h1m2 0h4m1 0h2m-21 1h7m3 0h1m1 0h2m1 0h3m2 0h5"/></svg></div>
+      <div class="info">
+        <div class="team">P1 · RED</div>
+        <div class="icon">🔥</div>
+        <div class="name">마법사</div>
+        <div class="role">광역 마법 · 뒷줄</div>
+        <div class="code">CHATO:P1:mage</div>
+      </div>
+    </div>
+    <div class="card" style="--c:#d6333f;--t:#fde8ea">
+      <div class="qr"><svg viewBox="0 0 33 33" class="segno"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#000" d="M2 2.5h7m1 0h1m1 0h1m3 0h3m1 0h1m3 0h7m-29 1h1m5 0h1m2 0h5m1 0h1m6 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m7 0h1m3 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h2m1 0h6m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h3m3 0h1m1 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m2 0h1m4 0h2m1 0h1m1 0h1m2 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-17 1h1m3 0h4m-18 1h1m1 0h3m1 0h4m2 0h3m1 0h1m2 0h1m3 0h1m2 0h1m-28 1h1m2 0h1m5 0h3m3 0h4m3 0h1m1 0h1m1 0h1m-26 1h1m1 0h5m1 0h5m3 0h1m4 0h3m1 0h2m-27 1h1m1 0h2m1 0h1m1 0h1m1 0h1m3 0h3m1 0h1m1 0h3m4 0h1m-29 1h1m1 0h1m1 0h3m3 0h1m1 0h2m3 0h2m2 0h3m1 0h1m2 0h1m-25 1h2m1 0h3m2 0h2m2 0h1m1 0h1m1 0h1m2 0h1m1 0h2m1 0h1m-29 1h1m2 0h2m1 0h2m2 0h1m1 0h1m1 0h4m2 0h2m1 0h1m2 0h3m-28 1h1m1 0h1m4 0h1m1 0h3m2 0h2m4 0h2m1 0h1m-25 1h1m1 0h1m1 0h4m2 0h4m2 0h1m1 0h4m2 0h1m1 0h3m-28 1h2m2 0h1m3 0h1m2 0h1m2 0h3m1 0h3m2 0h1m2 0h1m-28 1h1m2 0h1m2 0h3m1 0h3m1 0h1m1 0h5m1 0h1m3 0h3m-28 1h1m3 0h1m1 0h3m1 0h2m2 0h1m1 0h1m2 0h2m2 0h2m2 0h1m-29 1h1m3 0h1m1 0h2m1 0h3m2 0h1m4 0h6m1 0h2m-20 1h1m4 0h3m1 0h2m1 0h1m3 0h2m1 0h2m-29 1h7m2 0h2m2 0h1m4 0h3m1 0h1m1 0h5m-29 1h1m5 0h1m1 0h1m3 0h2m2 0h2m1 0h2m3 0h1m-25 1h1m1 0h3m1 0h1m1 0h3m3 0h3m3 0h7m-27 1h1m1 0h3m1 0h1m3 0h3m2 0h1m1 0h1m3 0h1m1 0h1m1 0h1m1 0h1m-28 1h1m1 0h3m1 0h1m1 0h1m2 0h3m2 0h1m3 0h2m1 0h2m1 0h1m1 0h1m-29 1h1m5 0h1m2 0h1m3 0h1m4 0h1m2 0h1m1 0h1m1 0h1m1 0h1m-28 1h7m4 0h1m1 0h1m2 0h1m3 0h5m1 0h3"/></svg></div>
+      <div class="info">
+        <div class="team">P1 · RED</div>
+        <div class="icon">✨</div>
+        <div class="name">성직자</div>
+        <div class="role">회복 · 뒷줄</div>
+        <div class="code">CHATO:P1:priest</div>
+      </div>
+    </div>
+    <div class="card" style="--c:#d6333f;--t:#fde8ea">
+      <div class="qr"><svg viewBox="0 0 33 33" class="segno"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#000" d="M2 2.5h7m2 0h1m2 0h4m1 0h1m1 0h2m1 0h7m-29 1h1m5 0h1m1 0h1m1 0h2m2 0h1m1 0h1m3 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h1m1 0h2m1 0h2m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m1 0h2m3 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m2 0h6m5 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m1 0h1m2 0h3m1 0h4m1 0h1m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-15 1h1m2 0h1m1 0h2m-19 1h1m2 0h4m1 0h4m1 0h1m1 0h1m1 0h3m1 0h5m-28 1h1m1 0h1m1 0h2m1 0h1m1 0h1m10 0h1m2 0h4m-26 1h2m2 0h3m1 0h1m1 0h4m3 0h1m1 0h2m1 0h1m4 0h1m-28 1h2m5 0h1m2 0h1m1 0h1m2 0h1m1 0h3m1 0h4m1 0h2m-26 1h2m1 0h2m1 0h2m2 0h1m1 0h4m3 0h1m2 0h1m1 0h2m-29 1h1m1 0h2m7 0h2m1 0h1m1 0h1m2 0h3m4 0h1m1 0h1m-27 1h1m2 0h3m6 0h2m3 0h4m2 0h2m1 0h1m-28 1h1m1 0h1m3 0h1m1 0h3m1 0h2m4 0h1m1 0h1m1 0h3m-26 1h5m1 0h2m2 0h1m3 0h1m1 0h1m1 0h1m2 0h6m-25 1h2m1 0h1m2 0h2m1 0h2m1 0h2m2 0h1m2 0h1m-22 1h3m2 0h3m3 0h7m1 0h1m1 0h4m3 0h1m-26 1h1m1 0h1m1 0h3m2 0h1m1 0h1m2 0h2m6 0h1m-26 1h2m2 0h3m1 0h1m2 0h2m6 0h7m1 0h2m-21 1h1m4 0h3m1 0h4m3 0h1m3 0h1m-29 1h7m1 0h1m1 0h3m2 0h2m3 0h1m1 0h1m1 0h1m1 0h1m1 0h1m-29 1h1m5 0h1m1 0h1m2 0h4m2 0h2m1 0h1m3 0h2m2 0h1m-29 1h1m1 0h3m1 0h1m3 0h1m1 0h2m1 0h10m1 0h3m-29 1h1m1 0h3m1 0h1m2 0h1m4 0h3m2 0h1m6 0h2m-28 1h1m1 0h3m1 0h1m1 0h1m3 0h1m3 0h1m2 0h2m3 0h1m2 0h2m-29 1h1m5 0h1m4 0h3m2 0h2m3 0h2m-23 1h7m2 0h1m1 0h7m3 0h1m2 0h3m1 0h1"/></svg></div>
+      <div class="info">
+        <div class="team">P1 · RED</div>
+        <div class="icon">💀</div>
+        <div class="name">주술사</div>
+        <div class="role">약화 · 뒷줄</div>
+        <div class="code">CHATO:P1:warlock</div>
+      </div>
+    </div></div></section><section class="page"><div class="grid">
+    <div class="card" style="--c:#2563d6;--t:#e6eefc">
+      <div class="qr"><svg viewBox="0 0 33 33" class="segno"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#000" d="M2 2.5h7m2 0h1m1 0h1m1 0h1m2 0h3m1 0h1m1 0h7m-29 1h1m5 0h1m2 0h1m1 0h1m1 0h1m4 0h3m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m2 0h3m2 0h2m4 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h1m1 0h2m3 0h1m1 0h1m2 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h2m1 0h1m5 0h1m1 0h1m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m3 0h1m3 0h1m4 0h2m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h1m1 0h3m1 0h7m-19 1h2m2 0h3m2 0h1m4 0h1m3 0h3m1 0h1m-22 1h3m5 0h2m1 0h2m1 0h1m6 0h1m1 0h2m-23 1h3m1 0h6m3 0h1m3 0h1m3 0h2m-28 1h3m1 0h2m2 0h1m1 0h1m1 0h4m3 0h1m7 0h1m-24 1h1m1 0h1m2 0h6m1 0h1m1 0h1m4 0h1m1 0h3m-28 1h2m1 0h3m5 0h4m2 0h3m1 0h1m1 0h1m4 0h1m-28 1h1m1 0h1m1 0h4m1 0h4m1 0h2m2 0h1m1 0h1m1 0h3m1 0h2m-22 1h4m1 0h1m2 0h1m1 0h3m1 0h3m1 0h1m2 0h1m-29 1h11m3 0h3m2 0h5m2 0h2m-26 1h2m3 0h2m1 0h1m1 0h5m1 0h3m1 0h3m3 0h1m-29 1h1m2 0h1m1 0h2m1 0h2m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m-20 1h1m1 0h1m2 0h6m2 0h1m2 0h2m4 0h1m1 0h3m-28 1h8m4 0h1m1 0h2m3 0h6m1 0h1m-20 1h2m2 0h1m3 0h1m1 0h3m3 0h1m2 0h2m-29 1h7m1 0h2m2 0h3m1 0h1m2 0h2m1 0h1m1 0h4m-28 1h1m5 0h1m2 0h2m1 0h1m3 0h1m1 0h3m3 0h1m2 0h2m-29 1h1m1 0h3m1 0h1m3 0h3m2 0h2m1 0h1m1 0h6m1 0h2m-29 1h1m1 0h3m1 0h1m1 0h3m3 0h2m7 0h1m2 0h1m-27 1h1m1 0h3m1 0h1m1 0h2m2 0h1m2 0h3m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1m-29 1h1m5 0h1m2 0h1m2 0h2m2 0h1m1 0h2m1 0h1m2 0h1m2 0h1m-28 1h7m2 0h2m2 0h2m3 0h1m1 0h2m4 0h2"/></svg></div>
+      <div class="info">
+        <div class="team">P2 · BLUE</div>
+        <div class="icon">🛡️</div>
+        <div class="name">기사</div>
+        <div class="role">탱커 · 앞줄</div>
+        <div class="code">CHATO:P2:knight</div>
+      </div>
+    </div>
+    <div class="card" style="--c:#2563d6;--t:#e6eefc">
+      <div class="qr"><svg viewBox="0 0 29 29" class="segno"><path fill="#fff" d="M0 0h29v29h-29z"/><path class="qrline" stroke="#000" d="M2 2.5h7m1 0h5m1 0h1m3 0h7m-25 1h1m5 0h1m2 0h1m1 0h1m3 0h1m2 0h1m5 0h1m-25 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h3m2 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m3 0h2m3 0h1m2 0h1m1 0h3m1 0h1m-25 1h1m5 0h1m2 0h1m5 0h1m2 0h1m5 0h1m-25 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-16 1h1m4 0h1m-13 1h1m1 0h3m1 0h1m1 0h1m1 0h6m3 0h1m2 0h1m-24 1h1m2 0h2m1 0h2m1 0h1m5 0h3m2 0h1m1 0h1m-21 1h2m1 0h1m3 0h2m1 0h2m2 0h2m2 0h4m-23 1h1m2 0h1m1 0h5m1 0h1m4 0h3m2 0h1m-23 1h1m1 0h2m1 0h4m1 0h1m1 0h7m1 0h2m-21 1h4m1 0h1m4 0h1m2 0h1m1 0h3m3 0h1m-24 1h1m5 0h3m5 0h1m2 0h1m4 0h3m-24 1h1m1 0h1m3 0h1m2 0h1m4 0h2m1 0h2m4 0h1m-25 1h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h8m1 0h1m1 0h1m-17 1h3m3 0h3m3 0h1m1 0h2m-24 1h7m2 0h2m1 0h1m2 0h2m1 0h1m1 0h2m1 0h2m-25 1h1m5 0h1m1 0h6m2 0h1m3 0h2m1 0h2m-25 1h1m1 0h3m1 0h1m1 0h2m2 0h3m1 0h6m1 0h1m-24 1h1m1 0h3m1 0h1m2 0h1m2 0h3m5 0h4m-24 1h1m1 0h3m1 0h1m1 0h1m5 0h3m3 0h1m3 0h1m-25 1h1m5 0h1m5 0h1m2 0h2m1 0h2m3 0h1m-24 1h7m2 0h3m1 0h4m1 0h1m1 0h5"/></svg></div>
+      <div class="info">
+        <div class="team">P2 · BLUE</div>
+        <div class="icon">🪨</div>
+        <div class="name">골렘</div>
+        <div class="role">탱커 · 앞줄</div>
+        <div class="code">CHATO:P2:golem</div>
+      </div>
+    </div>
+    <div class="card" style="--c:#2563d6;--t:#e6eefc">
+      <div class="qr"><svg viewBox="0 0 33 33" class="segno"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#000" d="M2 2.5h7m2 0h1m2 0h4m6 0h7m-29 1h1m5 0h1m2 0h4m1 0h2m1 0h2m3 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m2 0h3m1 0h3m2 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h1m1 0h1m1 0h4m4 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h2m1 0h3m2 0h1m1 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m2 0h1m2 0h1m1 0h1m2 0h3m2 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h1m1 0h1m2 0h2m4 0h2m-19 1h2m2 0h6m3 0h2m1 0h2m1 0h2m1 0h1m-22 1h1m3 0h3m1 0h3m2 0h1m1 0h1m1 0h2m2 0h2m1 0h1m-28 1h2m1 0h4m2 0h1m4 0h1m2 0h1m1 0h2m1 0h6m-28 1h2m3 0h1m1 0h1m1 0h4m2 0h2m1 0h1m1 0h1m6 0h1m-28 1h2m2 0h1m1 0h6m3 0h1m1 0h3m3 0h1m1 0h3m-25 1h2m2 0h1m4 0h2m5 0h1m1 0h1m1 0h1m4 0h1m-28 1h1m2 0h1m1 0h1m1 0h4m2 0h1m1 0h4m2 0h4m1 0h2m-29 1h1m1 0h1m2 0h1m2 0h1m2 0h1m7 0h1m1 0h1m1 0h1m1 0h1m2 0h1m-27 1h1m1 0h6m3 0h1m2 0h1m1 0h2m4 0h1m1 0h1m-26 1h1m1 0h3m1 0h5m6 0h2m2 0h2m1 0h1m2 0h1m-29 1h1m1 0h1m2 0h6m1 0h2m6 0h2m1 0h2m1 0h1m-22 1h1m3 0h1m1 0h2m2 0h1m4 0h1m4 0h2m1 0h1m-28 1h3m2 0h1m1 0h3m4 0h1m3 0h8m1 0h1m-21 1h2m4 0h1m3 0h3m3 0h1m3 0h1m-29 1h7m1 0h1m1 0h1m3 0h2m1 0h1m1 0h2m1 0h1m1 0h4m-28 1h1m5 0h1m2 0h1m3 0h1m1 0h2m1 0h3m3 0h1m-25 1h1m1 0h3m1 0h1m3 0h1m1 0h2m3 0h1m2 0h6m1 0h1m-28 1h1m1 0h3m1 0h1m1 0h1m1 0h3m1 0h4m5 0h1m3 0h1m-28 1h1m1 0h3m1 0h1m1 0h1m1 0h1m5 0h1m2 0h1m1 0h1m1 0h1m2 0h1m1 0h1m-29 1h1m5 0h1m2 0h1m1 0h1m3 0h3m4 0h1m1 0h2m1 0h1m-28 1h7m4 0h2m1 0h1m1 0h4m2 0h1m4 0h1"/></svg></div>
+      <div class="info">
+        <div class="team">P2 · BLUE</div>
+        <div class="icon">🪓</div>
+        <div class="name">광전사</div>
+        <div class="role">근접 딜러 · 앞줄</div>
+        <div class="code">CHATO:P2:berserker</div>
+      </div>
+    </div>
+    <div class="card" style="--c:#2563d6;--t:#e6eefc">
+      <div class="qr"><svg viewBox="0 0 33 33" class="segno"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#000" d="M2 2.5h7m1 0h1m3 0h2m2 0h1m1 0h1m3 0h7m-29 1h1m5 0h1m4 0h1m1 0h1m1 0h2m5 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m3 0h1m8 0h1m2 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m2 0h3m2 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h4m1 0h1m3 0h1m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m2 0h2m4 0h3m1 0h2m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-20 1h1m1 0h2m3 0h4m-18 1h1m1 0h3m1 0h1m1 0h2m3 0h1m2 0h1m2 0h1m3 0h1m2 0h1m-29 1h1m1 0h1m1 0h2m2 0h1m1 0h1m1 0h1m1 0h1m1 0h4m1 0h1m1 0h1m1 0h1m1 0h1m-28 1h3m2 0h5m1 0h4m1 0h3m5 0h2m1 0h2m-27 1h3m3 0h1m4 0h3m1 0h3m1 0h3m4 0h1m-25 1h1m1 0h4m1 0h1m1 0h1m2 0h3m1 0h4m1 0h1m2 0h1m-25 1h1m2 0h1m2 0h3m2 0h1m2 0h1m1 0h1m2 0h1m1 0h2m1 0h1m-28 1h3m1 0h3m1 0h2m1 0h1m2 0h2m3 0h2m1 0h1m2 0h3m-29 1h2m2 0h2m1 0h2m5 0h2m1 0h1m3 0h2m1 0h1m-21 1h1m1 0h1m1 0h5m2 0h1m2 0h4m2 0h1m1 0h1m1 0h1m-28 1h1m12 0h1m3 0h4m1 0h1m1 0h1m1 0h1m-28 1h1m1 0h2m2 0h7m1 0h1m3 0h3m1 0h1m2 0h1m1 0h2m-28 1h3m1 0h1m3 0h1m3 0h5m2 0h2m2 0h1m-25 1h1m2 0h1m1 0h2m4 0h2m3 0h1m1 0h7m3 0h1m-21 1h1m4 0h4m1 0h1m1 0h1m3 0h2m1 0h2m-29 1h7m2 0h1m1 0h1m5 0h1m1 0h2m1 0h1m1 0h5m-29 1h1m5 0h1m1 0h1m2 0h2m2 0h1m3 0h2m3 0h1m3 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m2 0h3m1 0h2m1 0h7m1 0h1m-29 1h1m1 0h3m1 0h1m4 0h1m1 0h2m1 0h1m1 0h4m1 0h1m1 0h2m-27 1h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h1m2 0h2m1 0h2m1 0h4m1 0h1m-29 1h1m5 0h1m2 0h1m1 0h1m2 0h1m6 0h1m1 0h1m3 0h1m-28 1h7m2 0h1m1 0h1m2 0h2m1 0h1m2 0h5m2 0h2"/></svg></div>
+      <div class="info">
+        <div class="team">P2 · BLUE</div>
+        <div class="icon">🗡️</div>
+        <div class="name">암살자</div>
+        <div class="role">암살 · 앞줄</div>
+        <div class="code">CHATO:P2:assassin</div>
+      </div>
+    </div>
+    <div class="card" style="--c:#2563d6;--t:#e6eefc">
+      <div class="qr"><svg viewBox="0 0 33 33" class="segno"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#000" d="M2 2.5h7m4 0h1m1 0h1m2 0h1m1 0h1m1 0h1m1 0h7m-29 1h1m5 0h1m2 0h1m9 0h2m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m5 0h1m1 0h2m4 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m2 0h1m1 0h4m1 0h2m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h4m1 0h5m1 0h1m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m4 0h4m4 0h2m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h4m5 0h2m1 0h1m-19 1h2m2 0h5m2 0h2m4 0h4m1 0h1m-25 1h2m1 0h2m4 0h1m1 0h2m3 0h1m7 0h2m1 0h1m-28 1h1m1 0h2m1 0h2m1 0h1m1 0h1m5 0h1m1 0h1m3 0h1m2 0h3m-28 1h1m1 0h1m1 0h1m3 0h2m5 0h1m1 0h3m7 0h1m-28 1h4m1 0h2m1 0h1m1 0h1m2 0h3m1 0h1m5 0h1m1 0h3m-28 1h2m1 0h3m3 0h3m2 0h1m1 0h4m1 0h1m1 0h1m4 0h1m-29 1h1m1 0h1m1 0h4m5 0h1m2 0h4m1 0h1m1 0h3m1 0h2m-29 1h3m1 0h2m1 0h1m2 0h2m3 0h2m2 0h1m1 0h3m1 0h1m1 0h1m-28 1h1m1 0h2m1 0h2m1 0h1m1 0h2m6 0h6m2 0h1m1 0h1m-28 1h5m2 0h3m1 0h2m3 0h4m1 0h4m2 0h1m-29 1h1m1 0h1m1 0h3m2 0h1m3 0h2m1 0h2m1 0h1m1 0h1m4 0h1m-25 1h4m1 0h5m6 0h2m4 0h1m1 0h3m-28 1h1m4 0h3m2 0h1m5 0h2m1 0h6m1 0h1m-20 1h3m1 0h1m1 0h1m1 0h2m1 0h2m3 0h1m2 0h2m-29 1h7m1 0h2m2 0h1m2 0h3m1 0h2m1 0h1m1 0h4m-28 1h1m5 0h1m6 0h1m1 0h1m1 0h4m3 0h1m2 0h1m-28 1h1m1 0h3m1 0h1m4 0h1m2 0h1m3 0h1m1 0h6m1 0h1m-28 1h1m1 0h3m1 0h1m1 0h2m2 0h2m3 0h1m5 0h1m2 0h1m-27 1h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m2 0h1m-29 1h1m5 0h1m4 0h1m5 0h1m1 0h1m1 0h1m2 0h1m2 0h1m-28 1h7m3 0h1m3 0h1m3 0h1m1 0h2m4 0h2"/></svg></div>
+      <div class="info">
+        <div class="team">P2 · BLUE</div>
+        <div class="icon">🏹</div>
+        <div class="name">궁수</div>
+        <div class="role">원거리 딜러 · 뒷줄</div>
+        <div class="code">CHATO:P2:archer</div>
+      </div>
+    </div>
+    <div class="card" style="--c:#2563d6;--t:#e6eefc">
+      <div class="qr"><svg viewBox="0 0 29 29" class="segno"><path fill="#fff" d="M0 0h29v29h-29z"/><path class="qrline" stroke="#000" d="M2 2.5h7m1 0h1m1 0h3m1 0h1m3 0h7m-25 1h1m5 0h1m3 0h2m1 0h1m2 0h1m1 0h1m5 0h1m-25 1h1m1 0h3m1 0h1m1 0h1m3 0h1m1 0h2m2 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m2 0h3m3 0h2m1 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m1 0h1m1 0h1m2 0h2m3 0h1m1 0h3m1 0h1m-25 1h1m5 0h1m4 0h1m3 0h1m2 0h1m5 0h1m-25 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-17 1h5m1 0h2m-11 1h2m3 0h1m4 0h2m1 0h1m1 0h1m1 0h1m1 0h1m-25 1h1m2 0h1m3 0h1m3 0h2m6 0h2m1 0h1m1 0h1m-24 1h3m1 0h2m1 0h1m2 0h2m4 0h1m2 0h1m2 0h2m-25 1h2m1 0h3m1 0h1m1 0h1m2 0h2m1 0h4m1 0h2m2 0h1m-25 1h1m2 0h1m1 0h3m1 0h2m1 0h2m1 0h2m1 0h1m3 0h2m-24 1h1m1 0h2m1 0h1m3 0h1m3 0h1m7 0h1m2 0h1m-25 1h1m1 0h1m2 0h3m2 0h4m1 0h1m2 0h1m1 0h2m1 0h2m-25 1h1m1 0h3m2 0h2m2 0h4m1 0h3m1 0h4m-24 1h1m5 0h2m2 0h1m2 0h9m2 0h1m-17 1h1m3 0h3m1 0h1m3 0h3m1 0h1m-25 1h7m2 0h3m1 0h1m1 0h2m1 0h1m1 0h1m3 0h1m-25 1h1m5 0h1m1 0h3m2 0h1m2 0h1m3 0h1m2 0h2m-25 1h1m1 0h3m1 0h1m2 0h1m5 0h6m1 0h2m-24 1h1m1 0h3m1 0h1m2 0h1m1 0h1m2 0h6m4 0h1m-25 1h1m1 0h3m1 0h1m3 0h1m1 0h1m8 0h2m1 0h1m-25 1h1m5 0h1m5 0h3m1 0h3m2 0h1m2 0h1m-25 1h7m3 0h2m1 0h2m1 0h1m2 0h2m1 0h1m1 0h1"/></svg></div>
+      <div class="info">
+        <div class="team">P2 · BLUE</div>
+        <div class="icon">🔥</div>
+        <div class="name">마법사</div>
+        <div class="role">광역 마법 · 뒷줄</div>
+        <div class="code">CHATO:P2:mage</div>
+      </div>
+    </div>
+    <div class="card" style="--c:#2563d6;--t:#e6eefc">
+      <div class="qr"><svg viewBox="0 0 33 33" class="segno"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#000" d="M2 2.5h7m1 0h1m1 0h1m2 0h4m1 0h1m3 0h7m-29 1h1m5 0h1m1 0h2m1 0h2m2 0h2m2 0h1m2 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m4 0h1m1 0h2m2 0h4m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h2m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h5m1 0h1m1 0h1m3 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m1 0h2m6 0h1m2 0h2m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-19 1h4m1 0h1m1 0h2m-16 1h1m2 0h1m2 0h3m3 0h4m1 0h1m2 0h3m1 0h2m-29 1h2m2 0h1m4 0h5m2 0h1m1 0h2m3 0h1m1 0h1m1 0h1m-27 1h2m2 0h2m1 0h1m1 0h3m3 0h1m2 0h1m2 0h3m2 0h1m-28 1h2m5 0h2m4 0h10m3 0h1m1 0h1m-28 1h2m3 0h1m1 0h3m1 0h1m1 0h1m6 0h3m1 0h1m2 0h1m-28 1h1m3 0h1m3 0h4m1 0h2m2 0h3m1 0h2m2 0h1m-27 1h1m2 0h6m1 0h3m2 0h1m5 0h1m5 0h2m-28 1h1m1 0h1m3 0h2m1 0h1m10 0h2m1 0h1m-25 1h2m3 0h2m5 0h1m2 0h1m2 0h1m1 0h3m1 0h4m-27 1h1m6 0h1m2 0h2m1 0h3m2 0h1m1 0h1m1 0h2m1 0h2m-28 1h1m2 0h10m1 0h1m1 0h1m2 0h2m1 0h1m3 0h3m-24 1h1m2 0h1m2 0h12m1 0h1m-25 1h1m1 0h3m1 0h2m1 0h2m3 0h1m1 0h9m2 0h1m-20 1h1m1 0h2m1 0h1m1 0h4m1 0h1m3 0h2m1 0h2m-29 1h7m2 0h1m2 0h1m5 0h1m1 0h1m1 0h1m1 0h1m1 0h2m-28 1h1m5 0h1m4 0h1m1 0h2m4 0h2m3 0h1m1 0h1m-27 1h1m1 0h3m1 0h1m2 0h2m3 0h1m1 0h1m3 0h7m-27 1h1m1 0h3m1 0h1m1 0h1m2 0h2m2 0h3m2 0h4m3 0h2m-29 1h1m1 0h3m1 0h1m2 0h2m1 0h2m2 0h3m2 0h1m2 0h1m3 0h1m-29 1h1m5 0h1m3 0h1m2 0h2m6 0h1m1 0h1m1 0h1m1 0h1m-28 1h7m2 0h4m1 0h1m1 0h2m1 0h3m1 0h5"/></svg></div>
+      <div class="info">
+        <div class="team">P2 · BLUE</div>
+        <div class="icon">✨</div>
+        <div class="name">성직자</div>
+        <div class="role">회복 · 뒷줄</div>
+        <div class="code">CHATO:P2:priest</div>
+      </div>
+    </div>
+    <div class="card" style="--c:#2563d6;--t:#e6eefc">
+      <div class="qr"><svg viewBox="0 0 33 33" class="segno"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#000" d="M2 2.5h7m1 0h1m2 0h4m5 0h1m1 0h7m-29 1h1m5 0h1m2 0h2m2 0h5m1 0h2m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m2 0h1m2 0h2m3 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h2m4 0h1m1 0h1m1 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h2m1 0h1m4 0h1m1 0h1m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m2 0h1m1 0h2m2 0h1m2 0h3m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-20 1h1m3 0h2m5 0h1m-19 1h1m1 0h3m1 0h5m7 0h2m3 0h1m2 0h1m-28 1h4m4 0h1m1 0h1m3 0h1m3 0h3m2 0h1m1 0h2m-26 1h2m2 0h1m3 0h1m1 0h1m2 0h1m1 0h1m1 0h2m4 0h1m1 0h2m-29 1h6m1 0h2m4 0h1m1 0h2m3 0h3m1 0h1m3 0h1m-29 1h1m5 0h1m1 0h4m1 0h2m1 0h2m1 0h1m1 0h3m4 0h1m-29 1h3m2 0h1m1 0h3m1 0h3m2 0h2m2 0h1m2 0h1m1 0h4m-28 1h1m1 0h1m2 0h1m2 0h1m1 0h1m1 0h2m1 0h2m2 0h1m1 0h2m2 0h3m-24 1h1m1 0h1m2 0h3m1 0h1m1 0h2m6 0h1m2 0h1m-28 1h1m3 0h3m2 0h2m2 0h2m1 0h4m2 0h1m1 0h1m1 0h2m-27 1h2m4 0h3m2 0h3m2 0h3m3 0h1m1 0h1m1 0h1m-28 1h1m1 0h5m5 0h1m1 0h1m1 0h3m3 0h1m1 0h2m1 0h2m-28 1h1m2 0h1m3 0h6m1 0h1m3 0h1m1 0h1m1 0h1m3 0h1m-28 1h1m3 0h4m1 0h1m2 0h7m1 0h5m3 0h1m-21 1h3m5 0h1m1 0h1m1 0h1m3 0h2m1 0h2m-29 1h7m2 0h2m2 0h1m3 0h1m1 0h2m1 0h1m1 0h5m-29 1h1m5 0h1m1 0h2m4 0h3m1 0h3m3 0h1m2 0h2m-29 1h1m1 0h3m1 0h1m1 0h5m2 0h2m1 0h1m1 0h7m1 0h1m-29 1h1m1 0h3m1 0h1m4 0h1m2 0h1m1 0h2m1 0h3m1 0h1m1 0h2m-27 1h1m1 0h3m1 0h1m1 0h1m1 0h9m1 0h2m1 0h3m2 0h1m-29 1h1m5 0h1m3 0h1m1 0h1m1 0h3m1 0h2m2 0h2m1 0h1m1 0h1m-28 1h7m2 0h1m7 0h1m1 0h1m3 0h2m1 0h3"/></svg></div>
+      <div class="info">
+        <div class="team">P2 · BLUE</div>
+        <div class="icon">💀</div>
+        <div class="name">주술사</div>
+        <div class="role">약화 · 뒷줄</div>
+        <div class="code">CHATO:P2:warlock</div>
+      </div>
+    </div></div></section>
+</body></html>

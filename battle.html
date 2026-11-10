@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>차토체스 · 전투</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/battle.css">
+</head>
+<body class="battle-page">
+  <header class="hud">
+    <div class="hud-team p1" id="hudP1"></div>
+    <div class="hud-mid">
+      <div class="hud-title">차토체스</div>
+      <div class="timer" id="timer">60</div>
+    </div>
+    <div class="hud-team p2" id="hudP2"></div>
+  </header>
+
+  <canvas id="board"></canvas>
+
+  <div class="ctrl">
+    <button id="muteBtn" class="ghost">🔊 소리 켜짐</button>
+    <button id="speedBtn" class="ghost">속도 1x</button>
+    <a class="ghost" href="index.html">등록 화면</a>
+  </div>
+  <div id="demoNote" class="demo-note" hidden>등록된 팀이 없어 무작위 팀으로 시연 중이에요</div>
+
+  <div id="result" class="result" hidden>
+    <div class="result-box">
+      <div class="result-sub" id="resultSub"></div>
+      <div class="result-title" id="resultTitle"></div>
+      <div class="mvp" id="mvp"></div>
+      <div class="result-btns">
+        <button id="againBtn" class="start">다시 싸우기</button>
+        <a class="ghost big" href="index.html" id="newBtn">새로 등록</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/sfx.js"></script>
+  <script src="js/battle.js"></script>
+</body>
+</html>

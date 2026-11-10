@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "rules": {
+    "manaPerAttack": 10,
+    "manaPerHitTaken": 5,
+    "armorFormula": "피해 = 공격력 × 100 / (100 + 방어력)"
+  },
+  "characters": [
+    {
+      "id": "knight", "qr": { "p1": "CHATO:P1:knight", "p2": "CHATO:P2:knight" }, "name": "기사", "icon": "🛡️",
+      "role": "탱커", "row": "front",
+      "hp": 900, "atk": 50, "atkSpeed": 0.7, "range": 1, "armor": 40, "moveSpeed": 1.0, "mana": 80,
+      "skill": { "name": "수호의 맹세", "desc": "3초간 받는 피해 50% 감소, 가까운 아군 2명에게 보호막 150" }
+    },
+    {
+      "id": "golem", "qr": { "p1": "CHATO:P1:golem", "p2": "CHATO:P2:golem" }, "name": "골렘", "icon": "🪨",
+      "role": "탱커", "row": "front",
+      "hp": 1100, "atk": 45, "atkSpeed": 0.5, "range": 1, "armor": 50, "moveSpeed": 0.7, "mana": 100,
+      "skill": { "name": "대지 강타", "desc": "주변 1칸의 적에게 150 피해 + 1.5초 기절" }
+    },
+    {
+      "id": "berserker", "qr": { "p1": "CHATO:P1:berserker", "p2": "CHATO:P2:berserker" }, "name": "광전사", "icon": "🪓",
+      "role": "근접 딜러", "row": "front",
+      "hp": 800, "atk": 72, "atkSpeed": 0.95, "range": 1, "armor": 25, "moveSpeed": 1.0, "mana": 60,
+      "skill": { "name": "피의 격노", "desc": "4초간 공격 속도 +60%, 준 피해의 30%만큼 체력 회복" }
+    },
+    {
+      "id": "assassin", "qr": { "p1": "CHATO:P1:assassin", "p2": "CHATO:P2:assassin" }, "name": "암살자", "icon": "🗡️",
+      "role": "암살", "row": "front",
+      "hp": 500, "atk": 70, "atkSpeed": 1.0, "range": 1, "armor": 15, "moveSpeed": 1.4, "mana": 50,
+      "passive": "전투 시작 시 적 뒷줄로 도약",
+      "skill": { "name": "그림자 일격", "desc": "체력이 가장 낮은 적 뒤로 순간이동해 공격력 200% 피해" }
+    },
+    {
+      "id": "archer", "qr": { "p1": "CHATO:P1:archer", "p2": "CHATO:P2:archer" }, "name": "궁수", "icon": "🏹",
+      "role": "원거리 딜러", "row": "back",
+      "hp": 500, "atk": 65, "atkSpeed": 1.0, "range": 4, "armor": 10, "moveSpeed": 1.0, "mana": 70,
+      "skill": { "name": "관통 화살", "desc": "일직선상의 모든 적에게 190 피해" }
+    },
+    {
+      "id": "mage", "qr": { "p1": "CHATO:P1:mage", "p2": "CHATO:P2:mage" }, "name": "마법사", "icon": "🔥",
+      "role": "광역 마법", "row": "back",
+      "hp": 450, "atk": 40, "atkSpeed": 0.7, "range": 3, "armor": 10, "moveSpeed": 1.0, "mana": 60,
+      "skill": { "name": "화염구", "desc": "대상과 주변 1칸의 적에게 330 피해" }
+    },
+    {
+      "id": "priest", "qr": { "p1": "CHATO:P1:priest", "p2": "CHATO:P2:priest" }, "name": "성직자", "icon": "✨",
+      "role": "회복", "row": "back",
+      "hp": 550, "atk": 35, "atkSpeed": 0.8, "range": 3, "armor": 15, "moveSpeed": 1.0, "mana": 70,
+      "skill": { "name": "치유의 빛", "desc": "체력 비율이 가장 낮은 아군 2명 300 회복" }
+    },
+    {
+      "id": "warlock", "qr": { "p1": "CHATO:P1:warlock", "p2": "CHATO:P2:warlock" }, "name": "주술사", "icon": "💀",
+      "role": "약화", "row": "back",
+      "hp": 560, "atk": 50, "atkSpeed": 0.8, "range": 3, "armor": 10, "moveSpeed": 1.0, "mana": 65,
+      "skill": { "name": "쇠약의 저주", "desc": "공격력이 가장 높은 적에게 180 피해 + 5초간 공격력 -40%, 받는 피해 +20%" }
+    }
+  ]
+}

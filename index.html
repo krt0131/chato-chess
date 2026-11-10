@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>차토체스 · 말 등록</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>차토체스</h1>
+    <span class="step">말 등록</span>
+    <div class="top-right">
+      <select id="camSelect" title="카메라 선택"></select>
+      <a class="ghost" href="print/qr_cards.html" target="_blank">QR 카드 보기</a>
+      <button id="mirrorBtn" class="ghost" title="좌우 반전">좌우반전</button>
+      <button id="resetBtn" class="ghost">초기화</button>
+    </div>
+  </header>
+
+  <main class="reg">
+    <section class="team p1" data-team="p1">
+      <div class="team-head">
+        <span class="badge">P1 · RED</span>
+        <span class="count"><b id="p1Count">0</b> / 4</span>
+      </div>
+      <div class="board" id="p1Board"></div>
+      <ul class="roster" id="p1Roster"></ul>
+    </section>
+
+    <section class="cam">
+      <div class="cam-box" id="camBox">
+        <video id="video" playsinline muted></video>
+        <canvas id="overlay"></canvas>
+        <div class="scan-frame"></div>
+        <div id="camMsg" class="cam-msg">카메라 준비 중…</div>
+      </div>
+      <p class="cam-hint">말의 QR을 카메라에 비춰 주세요. <span class="r">빨강</span>은 P1, <span class="b">파랑</span>은 P2로 자동 등록돼요.</p>
+      <button id="startBtn" class="start" disabled>전투 시작</button>
+      <p class="dev-hint">테스트: 숫자 1~8 = P1 등록, Shift+1~8 = P2 등록</p>
+    </section>
+
+    <section class="team p2" data-team="p2">
+      <div class="team-head">
+        <span class="badge">P2 · BLUE</span>
+        <span class="count"><b id="p2Count">0</b> / 4</span>
+      </div>
+      <div class="board" id="p2Board"></div>
+      <ul class="roster" id="p2Roster"></ul>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="lib/jsQR.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/register.js"></script>
+</body>
+</html>
