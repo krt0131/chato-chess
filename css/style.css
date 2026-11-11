@@ -29,6 +29,7 @@ button, select { font: inherit; }
   border-radius: 8px; padding: 7px 12px; cursor: pointer;
 }
 .ghost:hover { border-color: var(--dim); }
+#camSelect { max-width: 280px; text-overflow: ellipsis; }
 a.ghost { text-decoration: none; display: inline-flex; align-items: center; }
 
 /* 레이아웃 */

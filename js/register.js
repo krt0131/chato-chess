@@ -130,40 +130,172 @@
 
   // ---------- 카메라 ----------
   let stream, mirrored = true;
-  function setMirror(m) {
+  // 좌우반전은 카메라마다 따로 기억 (얼굴 쪽 웹캠은 반전, 위에서 내려다보는 실물화상기는 반전 안 함 등)
+  let mirrorKey = 'chato.mirror';
+  function setMirror(m, save = true) {
     mirrored = m;
     $('camBox').classList.toggle('mirror', m);
-    try { localStorage.setItem('chato.mirror', m ? '1' : '0'); } catch (e) {}
+    if (save) { try { localStorage.setItem(mirrorKey, m ? '1' : '0'); localStorage.setItem('chato.mirror', m ? '1' : '0'); } catch (e) {} }
   }
-  try { setMirror(localStorage.getItem('chato.mirror') !== '0'); } catch (e) { setMirror(true); }
+  function applyMirrorFor(label) {
+    mirrorKey = 'chato.mirror:' + (label || 'default');
+    let v = null;
+    try { v = localStorage.getItem(mirrorKey); } catch (e) {}
+    setMirror(v === null ? true : v === '1', false); // 이 카메라에 저장된 값, 처음 쓰는 카메라는 기본(반전 켬)
+  }
+  try { setMirror(localStorage.getItem('chato.mirror') !== '0', false); } catch (e) { setMirror(true, false); }
 
-  async function startCamera(deviceId) {
-    if (stream) stream.getTracks().forEach(t => t.stop());
+  // 카메라 교체 대비:
+  //  - 마지막으로 고른 카메라를 기억 (deviceId + 이름. 포트를 바꿔 꽂으면 id가 바뀔 수 있어 이름으로도 찾음)
+  //  - 카메라를 꽂거나 뽑으면 자동 감지 (devicechange)
+  //  - 쓰던 카메라가 빠지면 다른 카메라로 전환, 저장된 카메라가 다시 꽂히면 자동 복귀
+  const CAM_KEY = 'chato.cam';
+  let currentCamId = null;
+  let knownCamCount = 0;
+  let busy = Promise.resolve();
+
+  function loadPref() { try { return JSON.parse(localStorage.getItem(CAM_KEY)) || null; } catch (e) { return null; } }
+  function savePref(id, label) { try { localStorage.setItem(CAM_KEY, JSON.stringify({ id, label })); } catch (e) {} }
+  async function listCams() {
+    try { return (await navigator.mediaDevices.enumerateDevices()).filter(d => d.kind === 'videoinput'); }
+    catch (e) { return []; }
+  }
+  function isPref(cam, pref) { return !!pref && (cam.deviceId === pref.id || (!!pref.label && cam.label === pref.label)); }
+
+  function camError(e) {
+    const n = e && e.name;
+    if (n === 'NotAllowedError' || n === 'SecurityError') return '카메라 권한이 막혀 있어요.<br><small>주소창 왼쪽 자물쇠 → 카메라 → 허용 후 새로고침해 주세요.</small>';
+    if (n === 'NotReadableError' || n === 'TrackStartError') return '카메라를 다른 프로그램이 쓰고 있어요.<br><small>줌·카메라 앱 등을 끄고 다시 골라 주세요.</small>';
+    if (n === 'NotFoundError' || n === 'OverconstrainedError') return '연결된 카메라가 없어요.<br><small>카메라를 꽂으면 자동으로 켜져요.</small>';
+    return '카메라를 켤 수 없어요.<br><small>카메라 연결과 브라우저 권한을 확인해 주세요.</small>';
+  }
+
+  // 실제로 카메라 켜기 (실패하면 예외)
+  async function openCam(deviceId) {
+    if (stream) { stream.getTracks().forEach(t => { t.onended = null; t.stop(); }); stream = null; }
+    currentCamId = null;
     camMsg.textContent = '카메라 준비 중…';
     camMsg.hidden = false;
-    try {
-      stream = await navigator.mediaDevices.getUserMedia({
-        video: deviceId
-          ? { deviceId: { exact: deviceId }, width: { ideal: 1280 }, height: { ideal: 720 } }
-          : { width: { ideal: 1280 }, height: { ideal: 720 } },
-        audio: false,
-      });
-      video.srcObject = stream;
-      await video.play();
-      camMsg.hidden = true;
-      await fillCamList(stream.getVideoTracks()[0].getSettings().deviceId);
-    } catch (e) {
-      camMsg.innerHTML = '카메라를 켤 수 없어요.<br><small>브라우저의 카메라 권한을 확인해 주세요.</small>';
-      console.warn(e);
-    }
+    const size = { width: { ideal: 1280 }, height: { ideal: 720 } };
+    const s = await navigator.mediaDevices.getUserMedia({
+      video: deviceId ? { deviceId: { exact: deviceId }, ...size } : size,
+      audio: false,
+    });
+    stream = s;
+    const track = s.getVideoTracks()[0];
+    currentCamId = track.getSettings().deviceId || deviceId || null;
+    track.onended = onCamLost; // 케이블이 빠지면 호출됨
+    applyMirrorFor(track.label);
+    video.srcObject = s;
+    await video.play().catch(() => {});
+    camMsg.hidden = true;
+    return track;
   }
 
-  async function fillCamList(currentId) {
+  // 순서대로 실행 (꽂기/뽑기 이벤트가 겹쳐도 꼬이지 않게)
+  function queueCam(fn) { busy = busy.then(fn).catch(e => console.warn(e)); return busy; }
+
+  // 처음 켤 때: 저장된 카메라 → 이름으로 찾기 → 기본 카메라
+  function initCamera() {
+    return queueCam(async () => {
+      const pref = loadPref();
+      if (pref && pref.id) {
+        try { await openCam(pref.id); await fillCamList(); return; } catch (e) { /* 아래에서 이름으로 다시 찾음 */ }
+      }
+      try {
+        const track = await openCam(null);
+        if (pref) {
+          const match = (await listCams()).find(c => isPref(c, pref));
+          if (match && match.deviceId !== currentCamId) {
+            await openCam(match.deviceId);
+            savePref(match.deviceId, match.label); // id가 바뀌었으면 갱신
+          } else if (!match) {
+            toast(`저장된 카메라(${pref.label || '이전 카메라'})가 없어서 다른 카메라를 쓰고 있어요`);
+          }
+        } else {
+          savePref(currentCamId, track.label);
+        }
+      } catch (e) {
+        camMsg.innerHTML = camError(e);
+        camMsg.hidden = false;
+      }
+      await fillCamList();
+    });
+  }
+
+  // 사용자가 목록에서 고름 → 켜고 기억
+  function chooseCamera(deviceId) {
+    return queueCam(async () => {
+      try {
+        const track = await openCam(deviceId);
+        savePref(currentCamId, track.label);
+        toast(`카메라: ${track.label || '선택한 카메라'}`);
+      } catch (e) {
+        camMsg.innerHTML = camError(e);
+        camMsg.hidden = false;
+      }
+      await fillCamList();
+    });
+  }
+
+  // 쓰던 카메라가 빠졌을 때
+  function onCamLost() {
+    camMsg.innerHTML = '카메라 연결이 끊겼어요.<br><small>다른 카메라를 찾는 중…</small>';
+    camMsg.hidden = false;
+    currentCamId = null;
+    setTimeout(() => queueCam(async () => {
+      if (stream && stream.active && currentCamId) return; // 그 사이 다른 카메라로 이미 전환됨
+      const cams = await listCams();
+      if (!cams.length) { camMsg.innerHTML = camError({ name: 'NotFoundError' }); await fillCamList(); return; }
+      try { const t = await openCam(cams[0].deviceId); toast(`카메라가 빠져서 ${t.label || '다른 카메라'}로 바꿨어요`); }
+      catch (e) { camMsg.innerHTML = camError(e); camMsg.hidden = false; }
+      await fillCamList();
+    }), 600);
+  }
+
+  // 카메라를 꽂거나 뽑았을 때
+  if (navigator.mediaDevices && 'ondevicechange' in navigator.mediaDevices) {
+    let t = null;
+    navigator.mediaDevices.addEventListener('devicechange', () => {
+      clearTimeout(t);
+      t = setTimeout(() => queueCam(async () => {
+        const cams = await listCams();
+        const pref = loadPref();
+        const prefCam = cams.find(c => isPref(c, pref));
+        const curAlive = currentCamId && cams.some(c => c.deviceId === currentCamId);
+        if (prefCam && prefCam.deviceId !== currentCamId) {
+          // 저장된 카메라가 (다시) 꽂힘 → 그걸로 복귀
+          try { const tr = await openCam(prefCam.deviceId); savePref(currentCamId, tr.label); toast(`저장된 카메라(${tr.label || ''})로 바꿨어요`); }
+          catch (e) { console.warn(e); }
+        } else if (!curAlive && cams.length) {
+          // 카메라가 없던 상태에서 새로 꽂힘
+          try { const tr = await openCam(cams[0].deviceId); toast(`새 카메라 연결: ${tr.label || '카메라'}`); }
+          catch (e) { camMsg.innerHTML = camError(e); camMsg.hidden = false; }
+        } else if (cams.length > knownCamCount) {
+          // 지금 카메라는 그대로 두고, 새로 꽂힌 카메라는 목록에만 추가
+          toast('새 카메라가 연결됐어요. 위쪽 📷 메뉴에서 고를 수 있어요');
+        }
+        await fillCamList();
+      }), 700);
+    });
+  }
+
+  async function fillCamList() {
     const sel = $('camSelect');
-    const cams = (await navigator.mediaDevices.enumerateDevices()).filter(d => d.kind === 'videoinput');
-    sel.innerHTML = cams.map((d, i) =>
-      `<option value="${d.deviceId}" ${d.deviceId === currentId ? 'selected' : ''}>${d.label || '카메라 ' + (i + 1)}</option>`).join('');
-    sel.hidden = cams.length < 2;
+    const cams = await listCams();
+    knownCamCount = cams.length;
+    const pref = loadPref();
+    if (!cams.length) {
+      sel.innerHTML = '<option value="">📷 카메라 없음</option>';
+    } else {
+      sel.innerHTML = cams.map((d, i) => {
+        const name = d.label || '카메라 ' + (i + 1);
+        const star = isPref(d, pref) ? ' ★' : '';
+        return `<option value="${d.deviceId}" ${d.deviceId === currentCamId ? 'selected' : ''}>📷 ${name}${star}</option>`;
+      }).join('');
+    }
+    sel.title = '카메라 선택 (★ = 기억된 카메라). 새 카메라를 꽂으면 자동으로 목록에 추가돼요';
+    sel.hidden = false;
   }
 
   // ---------- QR 스캔 루프 ----------
@@ -213,7 +345,7 @@
   }
 
   // ---------- 버튼/키보드 ----------
-  $('camSelect').onchange = e => startCamera(e.target.value);
+  $('camSelect').onchange = e => { if (e.target.value) chooseCamera(e.target.value); };
   $('mirrorBtn').onclick = () => setMirror(!mirrored);
   $('resetBtn').onclick = () => {
     teams = { p1: [], p2: [] };
@@ -233,6 +365,6 @@
   });
 
   render();
-  startCamera();
+  initCamera();
   scan();
 })();
